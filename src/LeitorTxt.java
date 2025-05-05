@@ -1,17 +1,9 @@
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class LeitorTxt extends JFrame {
@@ -23,15 +15,26 @@ public class LeitorTxt extends JFrame {
     private String caminhoArquivo = null;
 
     public LeitorTxt() {
-        super("Contador de Palavras em Arquivo");
+        super("Contador de Palavras no Arquivo Txt");
 
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout(10, 10));
+        getContentPane().setBackground(new Color(245, 245, 245)); // cor de fundo da janela
+
+        Font fonteCampos = new Font("Segoe UI", Font.PLAIN, 14);
+        Font fonteBotoes = new Font("Segoe UI", Font.BOLD, 14);
 
         // Painel de seleção de arquivo
-        JPanel painelArquivo = new JPanel();
+        JPanel painelArquivo = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        painelArquivo.setBackground(new Color(220, 230, 250));
+
         campoArquivo = new JTextField(20);
         campoArquivo.setEditable(false);
+        campoArquivo.setFont(fonteCampos);
+
         botaoEscolherArquivo = new JButton("Escolher Arquivo");
+        botaoEscolherArquivo.setFont(fonteBotoes);
+        botaoEscolherArquivo.setBackground(new Color(100, 149, 237));
+        botaoEscolherArquivo.setForeground(Color.WHITE);
 
         painelArquivo.add(new JLabel("Arquivo:"));
         painelArquivo.add(campoArquivo);
@@ -40,9 +43,16 @@ public class LeitorTxt extends JFrame {
         add(painelArquivo, BorderLayout.NORTH);
 
         // Painel de busca
-        JPanel painelBusca = new JPanel();
+        JPanel painelBusca = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        painelBusca.setBackground(new Color(240, 255, 240));
+
         campoPalavra = new JTextField(20);
+        campoPalavra.setFont(fonteCampos);
+
         botaoBuscar = new JButton("Buscar Palavra");
+        botaoBuscar.setFont(fonteBotoes);
+        botaoBuscar.setBackground(new Color(60, 179, 113));
+        botaoBuscar.setForeground(Color.WHITE);
 
         painelBusca.add(new JLabel("Palavra:"));
         painelBusca.add(campoPalavra);
@@ -50,7 +60,13 @@ public class LeitorTxt extends JFrame {
 
         add(painelBusca, BorderLayout.CENTER);
 
-        // Configurações dos botões
+        // Rodapé
+        JLabel rodape = new JLabel("Desenvolvido por Ísis, Gustavo e Henrique", SwingConstants.CENTER);
+        rodape.setFont(new Font("Segoe UI", Font.ITALIC, 12));
+        rodape.setForeground(Color.DARK_GRAY);
+        add(rodape, BorderLayout.SOUTH);
+
+        // Ações dos botões
         botaoEscolherArquivo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,7 +82,8 @@ public class LeitorTxt extends JFrame {
         });
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 150);
+        setSize(520, 200);
+        setResizable(false);
         setLocationRelativeTo(null); // Centralizar a janela
         setVisible(true);
     }
